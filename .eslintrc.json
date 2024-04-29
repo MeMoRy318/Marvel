@@ -1,0 +1,36 @@
+{
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "project": "tsconfig.json",
+      "tsconfigRootDir": "."
+    },
+    "plugins": ["import", "@typescript-eslint"],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
+    "rules": {
+      "no-console": "warn",
+      "prefer-const": "error",
+      "indent": ["error", 2],
+      "quotes": ["error", "single"],
+      "semi": ["error", "always"],
+      "import/order": ["error", {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": false }
+      }],
+      "import/newline-after-import": ["error", { "count": 2 }],
+      "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_Enum" }]
+    }
+  }
