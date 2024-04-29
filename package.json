@@ -10,6 +10,7 @@
     "@types/node": "^16.18.96",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
+    "axios": "^1.6.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -17,12 +18,12 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "sass": "^1.75.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-import-resolver-node": "^0.3.9",
-		"eslint-plugin-import": "^2.29.1",
-		"eslint-plugin-n": "^16.6.2",
-		"eslint-plugin-promise": "^6.1.1",
-    "eslint-config-standard": "^17.1.0"
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "sass": "^1.75.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,7 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
- 
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import decoration from '../../resources/img/vision.png';
+import { marvelService } from '../../services';
 import AppHeader from '../appHeader/AppHeader';
 import CharInfo from '../charInfo/CharInfo';
 import RandomChar from '../randomChar/RandomChar';
