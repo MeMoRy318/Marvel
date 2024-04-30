@@ -1,7 +1,14 @@
 import {FC,PropsWithChildren} from 'react';
 
+import { useFetching } from '../../customHook';
+import { IMarvelCharacterResponse } from '../../interfaces/marvel-interface';
 import mjolnir from '../../resources/img/mjolnir.png';
-import thor from '../../resources/img/thor.jpeg';
+import { marvelService } from '../../services';
+import { getRandomId } from '../../utility';
+import Char from '../char/Char';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Spinner from '../spiner/Spiner';
+
 
 import './randomChar.scss';
 
@@ -10,25 +17,23 @@ type IProps = PropsWithChildren
 
 
 const RandomChar:FC<IProps> = () => {
+  const characterId = getRandomId(1011000, 1011400);
+  const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getById(characterId),null);
+
+
+  const getStatus = () => {
+    if (isLoading) return <Spinner />;
+    if (error) return <ErrorMessage />;
+    if (data) return <Char char={data} />;
+    return null;
+  };
+
+  const status = getStatus();
+  
+  
   return (
     <div className="randomchar">
-      <div className="randomchar__block">
-        <img src={thor} alt="Random character" className="randomchar__img"/>
-        <div className="randomchar__info">
-          <p className="randomchar__name">Thor</p>
-          <p className="randomchar__descr">
-                        As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate...
-          </p>
-          <div className="randomchar__btns">
-            <a href="#" className="button button__main">
-              <div className="inner">homepage</div>
-            </a>
-            <a href="#" className="button button__secondary">
-              <div className="inner">Wiki</div>
-            </a>
-          </div>
-        </div>
-      </div>
+      {status}
       <div className="randomchar__static">
         <p className="randomchar__title">
                     Random character for today!<br/>
