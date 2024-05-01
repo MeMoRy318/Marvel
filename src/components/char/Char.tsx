@@ -11,7 +11,7 @@ interface IProps extends PropsWithChildren {
 
 const Char:FC<IProps> = ({char}) => {
     
-  const {description,homepage,name,thumbnail,wiki} = transformCharacter(char);
+  const {description,homepage,name,thumbnail,wiki} = transformCharacter(char)[0];
 
   return (
     <div className="randomchar__block">

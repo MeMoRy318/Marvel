@@ -1,54 +1,38 @@
 import {FC,PropsWithChildren} from 'react';
 
-import abyss from '../../resources/img/abyss.jpg';
+import { useFetching } from '../../customHook';
+import { IMarvelCharacterResponse } from '../../interfaces/marvel-interface';
+import { marvelService } from '../../services';
+import CharListItem from '../charListItem/CharListItem';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Spinner from '../spiner/Spiner';
 
 import './charList.scss';
+
 
 
 type IProps = PropsWithChildren
 
 
 const CharList:FC<IProps> = () => {
+
+
+  const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(marvelService.characters.getAll,null);
+
+
+  const getStatus = () => {
+    if (isLoading) return <Spinner/>;
+    if (error) return <ErrorMessage />;
+    if (data) return <CharListItem data={data} />;
+    return null;
+  };
+
+  const status = getStatus();
+
+
   return (
     <div className="char__list">
-      <ul className="char__grid">
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item char__item_selected">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-        <li className="char__item">
-          <img src={abyss} alt="abyss"/>
-          <div className="char__name">Abyss</div>
-        </li>
-      </ul>
+      {status}
       <button className="button button__main button__long">
         <div className="inner">load more</div>
       </button>

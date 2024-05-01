@@ -2,11 +2,11 @@ import {FC,PropsWithChildren} from 'react';
 
 import { useFetching } from '../../customHook';
 import { IMarvelCharacterResponse } from '../../interfaces/marvel-interface';
-import mjolnir from '../../resources/img/mjolnir.png';
 import { marvelService } from '../../services';
 import { getRandomId } from '../../utility';
 import Char from '../char/Char';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import RandomCharStatic from '../randomCharStatic/RandomCharStatic';
 import Spinner from '../spiner/Spiner';
 
 
@@ -18,7 +18,8 @@ type IProps = PropsWithChildren
 
 const RandomChar:FC<IProps> = () => {
   const characterId = getRandomId(1011000, 1011400);
-  const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getById(characterId),null);
+  const trigger = false;
+  const {data,error,isLoading,setTrigger} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getById(characterId),trigger);
 
 
   const getStatus = () => {
@@ -29,24 +30,12 @@ const RandomChar:FC<IProps> = () => {
   };
 
   const status = getStatus();
-  
+
   
   return (
     <div className="randomchar">
       {status}
-      <div className="randomchar__static">
-        <p className="randomchar__title">
-                    Random character for today!<br/>
-                    Do you want to get to know him better?
-        </p>
-        <p className="randomchar__title">
-                    Or choose another one
-        </p>
-        <button className="button button__main">
-          <div className="inner">try it</div>
-        </button>
-        <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
-      </div>
+      <RandomCharStatic setTrigger={setTrigger}/>
     </div>
   );
 };
