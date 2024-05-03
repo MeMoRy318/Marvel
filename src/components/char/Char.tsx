@@ -10,12 +10,18 @@ interface IProps extends PropsWithChildren {
 
 
 const Char:FC<IProps> = ({char}) => {
-    
+  
+  
   const {description,homepage,name,thumbnail,wiki} = transformCharacter(char)[0];
 
+
+  const isNotFoundImg = thumbnail.includes('image_not_available.jpg');
+  const style = isNotFoundImg ? 'unset' : 'cover';
+  
+  
   return (
     <div className="randomchar__block">
-      <img src={thumbnail} alt="Random character" className="randomchar__img"/>
+      <img src={thumbnail} alt="Random character" className="randomchar__img" style={{objectFit:style}}/>
       <div className="randomchar__info">
         <p className="randomchar__name">{name}</p>
         <p className="randomchar__descr">{description}</p>

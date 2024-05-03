@@ -3,7 +3,7 @@ interface Thumbnail {
     extension: string;
   }
   
-  interface Comic {
+  interface IComic {
     resourceURI: string;
     name: string;
   }
@@ -39,7 +39,7 @@ interface Thumbnail {
     comics: {
       available: number;
       collectionURI: string;
-      items: Comic[];
+      items: IComic[];
       returned: number;
     };
     series: {
@@ -73,5 +73,14 @@ interface Thumbnail {
     };
   }
   
+ interface ITrasformChar {
+    id: number;
+    name: string;
+    description: string;
+    thumbnail: string;
+    homepage: string;
+    wiki: string;
+    comics: IComic[];
+}
 
-export type { IMarvelCharacterData, IMarvelCharacterResponse };
+export type { IMarvelCharacterData, IMarvelCharacterResponse,ITrasformChar,IComic };

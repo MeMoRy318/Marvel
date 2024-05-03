@@ -1,7 +1,7 @@
 import {FC,PropsWithChildren} from 'react';
 
 import { useFetching } from '../../customHook';
-import { IMarvelCharacterResponse } from '../../interfaces/marvel-interface';
+import { IMarvelCharacterResponse,ITrasformChar } from '../../interfaces/marvel-interface';
 import { marvelService } from '../../services';
 import CharListItem from '../charListItem/CharListItem';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -11,10 +11,12 @@ import './charList.scss';
 
 
 
-type IProps = PropsWithChildren
+interface IProps extends PropsWithChildren{
+  setChar: React.Dispatch<React.SetStateAction<ITrasformChar | null>>
+}
 
 
-const CharList:FC<IProps> = () => {
+const CharList:FC<IProps> = ({setChar}) => {
 
 
   const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(marvelService.characters.getAll,null);
@@ -23,7 +25,7 @@ const CharList:FC<IProps> = () => {
   const getStatus = () => {
     if (isLoading) return <Spinner/>;
     if (error) return <ErrorMessage />;
-    if (data) return <CharListItem data={data} />;
+    if (data) return <CharListItem data={data} setChar={setChar}/>;
     return null;
   };
 

@@ -8,7 +8,7 @@ type IProps = PropsWithChildren
 
 const AppHeader:FC<IProps> = () => {
   return (
-    <header className="app__header">
+    <header className="app__header" style={{}}>
       <h1 className="app__title">
         <a href="#">
           <span>Marvel</span> information portal
