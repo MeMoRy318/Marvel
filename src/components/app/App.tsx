@@ -4,6 +4,7 @@ import { ITrasformChar } from '../../interfaces/marvel-interface';
 import decoration from '../../resources/img/vision.png';
 import AppHeader from '../appHeader/AppHeader';
 import CharInfo from '../charInfo/CharInfo';
+import { ErrorBoundary } from '../errorBoundary/ErrorBoundary';
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../сharList/CharList';
 
@@ -23,9 +24,13 @@ const App:FC<IProps> = () => {
     <div className='app'>
       <AppHeader/>
       <main>
-        <RandomChar/>
+        <ErrorBoundary>
+          <RandomChar/>
+        </ErrorBoundary>
         <div className="char__content">
+          {/* <ErrorBoundary> */}
           <CharList setChar={setChar}/>
+          {/* </ErrorBoundary> */}
           <CharInfo char={char}/>
         </div>
         <img className="bg-decoration" src={decoration} alt="vision"/>

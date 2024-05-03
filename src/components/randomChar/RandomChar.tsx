@@ -29,7 +29,7 @@ const RandomChar:FC<IProps> = () => {
     return null;
   };
 
-  const status = getStatus();
+  const status = getStatus(); 
 
   
   return (
