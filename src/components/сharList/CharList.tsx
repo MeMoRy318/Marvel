@@ -1,4 +1,4 @@
-import {FC,PropsWithChildren} from 'react';
+import {FC,PropsWithChildren, useState} from 'react';
 
 import { useFetching } from '../../customHook';
 import { IMarvelCharacterResponse,ITrasformChar } from '../../interfaces/marvel-interface';
@@ -18,25 +18,36 @@ interface IProps extends PropsWithChildren{
 
 const CharList:FC<IProps> = ({setChar}) => {
 
+  const [offset,setOffset] = useState<number>(0);
+  const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getAll(offset),true,offset);
 
-  const {data,error,isLoading} = useFetching<IMarvelCharacterResponse>(marvelService.characters.getAll,null);
 
-
-  const getStatus = () => {
-    if (isLoading) return <Spinner/>;
+  const renderContent = () => {
+    if (isLoading && !data) return <Spinner/>;
     if (error) return <ErrorMessage />;
     if (data) return <CharListItem data={data} setChar={setChar}/>;
     return null;
   };
 
-  const status = getStatus();
+
+  const onClick = () =>{
+    setOffset(prev => prev + 9);
+  };
+
+
+  const btnText = isLoading ? '...loading' : 'load more';
+  const disabled = !!(data && data.data.total < offset) || isLoading;
 
 
   return (
     <div className="char__list">
-      {status}
-      <button className="button button__main button__long">
-        <div className="inner">load more</div>
+      {renderContent()}
+      <button 
+        className="button button__main button__long"
+        onClick={onClick}
+        disabled={disabled}
+      >
+        <div className="inner">{btnText}</div>
       </button>
     </div>
   );

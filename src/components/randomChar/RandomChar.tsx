@@ -19,22 +19,20 @@ type IProps = PropsWithChildren
 const RandomChar:FC<IProps> = () => {
   const characterId = getRandomId(1011000, 1011400);
   const trigger = false;
-  const {data,error,isLoading,setTrigger} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getById(characterId),trigger);
+  const {data,error,isLoading,setTrigger} = useFetching<IMarvelCharacterResponse>(()=> marvelService.characters.getById(characterId),false,trigger);
 
 
-  const getStatus = () => {
+  const renderContent = () => {
     if (isLoading) return <Spinner />;
     if (error) return <ErrorMessage />;
     if (data) return <Char char={data} />;
     return null;
   };
 
-  const status = getStatus(); 
-
   
   return (
     <div className="randomchar">
-      {status}
+      {renderContent()}
       <RandomCharStatic setTrigger={setTrigger}/>
     </div>
   );

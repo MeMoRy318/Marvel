@@ -19,7 +19,6 @@ const App:FC<IProps> = () => {
   
   const [char, setChar] = useState<ITrasformChar | null>(null);
 
-
   return (
     <div className='app'>
       <AppHeader/>
