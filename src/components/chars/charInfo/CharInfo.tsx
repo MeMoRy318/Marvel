@@ -1,0 +1,28 @@
+import {FC,PropsWithChildren} from 'react';
+
+import { ITrasformChar } from '../../../interfaces';
+import { Skeleton } from '../../UI';
+import {CharInfoItem} from '../../chars';
+import {Comics} from '../../comics';
+
+import './charInfo.scss';
+
+
+interface IProps extends PropsWithChildren{
+  char: ITrasformChar | null
+}
+
+
+const CharInfo:FC<IProps> = ({char}) => {
+
+
+  const content = char ? <><CharInfoItem char={char}/><Comics comics={char.comics}/></> : <Skeleton/>;
+
+  return (
+    <div className="char__info">
+      {content}
+    </div>
+  );
+};
+
+export {CharInfo};

@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import {ErrorMessage} from '../UI';
 
 
 interface ErrorBoundaryProps {
