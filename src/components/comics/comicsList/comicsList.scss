@@ -1,6 +1,10 @@
 .comics {
     &__list {
         margin-top: 45px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;  
     }
     &__grid {
         display: grid;

@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { ComicsPage, MainPage } from '../../../pages';
+import { ComicsPage, MainPage, SingleComicPage } from '../../../pages';
 import {AppHeader} from '../../app';
 
 import './app.scss';
@@ -18,7 +18,8 @@ const App:FC<IProps> = () => {
       <main>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
-          <Route path='comics' element={<ComicsPage/>}/>
+          <Route path='/comics' element={<ComicsPage/>}/>
+          <Route path='/comics/:id' element={<SingleComicPage/>}/>
         </Routes>
       </main>    
     </div>
