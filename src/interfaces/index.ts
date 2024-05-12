@@ -1,1 +1,2 @@
-export * from './marvel-interface';
+export * from './сharacter-interface';
+export * from './comic-interface';

@@ -1,5 +1,5 @@
 import { urls } from '../configs';
-import { IMarvelCharacterResponse } from '../interfaces/marvel-interface';
+import { IMarvelComicData,IMarvelCharacterResponse } from '../interfaces';
 
 import { axiosService } from './axiosService';
 
@@ -10,8 +10,8 @@ const marvelService = {
     getById:(id:string | number)=> axiosService.get<IMarvelCharacterResponse>(urls.characters.getById(id)) 
   },
   comics:{
-    getAll:(limit:number = 10)=> axiosService.get<IMarvelCharacterResponse>(urls.comics.getAll,{params:{limit}}),
-    getById:(id:string | number)=> axiosService.get<IMarvelCharacterResponse>(urls.comics.getById(id))
+    getAll:(offset:number,limit:number = 8)=> axiosService.get<IMarvelComicData>(urls.comics.getAll,{params:{limit,offset}}),
+    getById:(id:string | number)=> axiosService.get<IMarvelComicData>(urls.comics.getById(id))
   }
 };
 

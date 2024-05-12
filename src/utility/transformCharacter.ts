@@ -1,4 +1,4 @@
-import { IMarvelCharacterResponse } from '../interfaces/marvel-interface';
+import { IMarvelCharacterResponse } from '../interfaces/сharacter-interface';
 
 
 const transformCharacter = (data:IMarvelCharacterResponse) => {

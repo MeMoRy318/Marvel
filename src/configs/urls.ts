@@ -8,5 +8,4 @@ const urls = {
     getById:(id:string | number):string => `/comics/${id}`
   }
 };
-
 export {urls};
