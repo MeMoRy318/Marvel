@@ -2,7 +2,7 @@ import {FC,PropsWithChildren} from 'react';
 
 import { ITrasformChar } from '../../../interfaces';
 import { Skeleton } from '../../UI';
-import {CharInfoItem} from '../../chars';
+import {CharInfoItem, CharSearchForm} from '../../chars';
 import {Comics} from '../../comics';
 
 import './charInfo.scss';
@@ -19,8 +19,11 @@ const CharInfo:FC<IProps> = ({char}) => {
   const content = char ? <><CharInfoItem char={char}/><Comics comics={char.comics}/></> : <Skeleton/>;
 
   return (
-    <div className="char__info">
-      {content}
+    <div>
+      <div className="char__info">
+        {content}
+      </div>
+      <CharSearchForm/>
     </div>
   );
 };

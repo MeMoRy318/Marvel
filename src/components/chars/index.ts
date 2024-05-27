@@ -4,3 +4,6 @@ export * from './charInfoItem/CharInfoItem';
 export * from './randomChar/RandomChar';
 export * from './randomCharStatic/RandomCharStatic';
 export * from './сharList/CharList';
+export * from './сharSearchForm/CharSearchForm';
+export * from './charMessage/CharMessage';
+export * from './searchInput/SearchInput';

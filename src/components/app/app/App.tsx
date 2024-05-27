@@ -21,7 +21,7 @@ const App:FC<IProps> = () => {
           <Route path='/comics' element={<ComicsPage/>}/>
           <Route path='/comics/:id' element={<SingleComicPage/>}/>
         </Routes>
-      </main>    
+      </main> 
     </div>
   );
 };
