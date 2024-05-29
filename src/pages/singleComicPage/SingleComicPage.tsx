@@ -21,4 +21,4 @@ const SingleComicPage = () => {
   );
 };
 
-export {SingleComicPage};
+export default SingleComicPage;
