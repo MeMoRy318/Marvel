@@ -5,12 +5,12 @@ import { transformCharacter } from '../../../utility';
 
 
 interface IProps extends PropsWithChildren {
-    char:IMarvelCharacterResponse
+    data:IMarvelCharacterResponse
 }
 
 
-const Char:FC<IProps> = ({char}) => {
-  const {description,homepage,name,thumbnail,wiki} = transformCharacter(char)[0];
+const Char:FC<IProps> = ({data}) => {
+  const {description,homepage,name,thumbnail,wiki} = transformCharacter(data)[0];
 
   const isNotFoundImg = thumbnail.includes('image_not_available.jpg');
   const style = isNotFoundImg ? 'unset' : 'cover';

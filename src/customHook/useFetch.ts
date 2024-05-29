@@ -6,33 +6,39 @@ import { useEffect, useState } from 'react';
 type IRes<T> = Promise<AxiosResponse<T>>
 type ICallback<T> = () => IRes<T>;
 
+export enum EStatus {
+  PENDING = 'pending',
+  LOADING = 'loading',
+  ERROR = 'error',
+  SACCESS = 'saccess'
+}
 
 interface IFetching<T> {
     data: T | null
-    error: string
-    isLoading: boolean
     setReload: React.Dispatch<React.SetStateAction<boolean>>
+    status:EStatus
 }
 
+
+
 function useFetching<T>(callback: ICallback<T>, ...args:unknown[]): IFetching<T> {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
   const [data, setData] = useState<T | null>(null);
   const [reload,setReload] = useState<boolean>(false);
-  
+  const [status,setStatus] = useState<EStatus>(EStatus.PENDING);
+
   useEffect(() => {
-    setIsLoading(true);
-    setError('');
+    setStatus(EStatus.LOADING);
     callback()
-      .then(({ data:response }) => setData(response))
-      .catch((e: Error) => {
-        setIsLoading(false);
-        setError(e.message);
+      .then(({ data:response }) => {
+        setData(response);
+        setStatus(EStatus.SACCESS);
       })
-      .finally(() => setIsLoading(false));
+      .catch(() => {
+        setStatus(EStatus.ERROR);
+      });
   }, [...args,reload]);
 
-  return { data, error, isLoading, setReload };
+  return { data, setReload,status };
 }
 
 export { useFetching };

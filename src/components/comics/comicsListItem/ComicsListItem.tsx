@@ -44,7 +44,7 @@ const ComicsListItem:FC<IProps> = ({data}) => {
         onClick={()=> onClick(comic.id)}
       >
         <div >
-          <img src={comic.thumbnail} alt={comic.name} className="comics__item-img" style={{objectFit:style}}/>
+          <img  src={comic.thumbnail} alt={comic.name} className="comics__item-img" style={{objectFit:style}}/>
           <div className="comics__item-name">{comic.name}</div>
           <div className="comics__item-price">{comic.price}</div>
         </div>

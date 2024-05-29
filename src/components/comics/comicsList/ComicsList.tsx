@@ -1,9 +1,9 @@
-import {useState,useMemo} from 'react';
+import {useState} from 'react';
 
-import { useFetching } from '../../../customHook';
+import { EStatus, useFetching } from '../../../customHook';
 import { IMarvelComicData } from '../../../interfaces';
 import { marvelService } from '../../../services';
-import { ErrorMessage, Spinner } from '../../UI';
+import { renderContent } from '../../../utility';
 import { ComicsListItem } from '../comicsListItem/ComicsListItem';
 
 import './comicsList.scss';
@@ -11,7 +11,7 @@ import './comicsList.scss';
 
 const ComicsList = () => {
   const [offset, setOffset] = useState<number>(0);
-  const { data, error, isLoading } = useFetching<IMarvelComicData>(
+  const { data,status } = useFetching<IMarvelComicData>(
     () => marvelService.comics.getAll(offset),
     offset
   );
@@ -20,20 +20,14 @@ const ComicsList = () => {
     setOffset(prevOffset => prevOffset + 9);
   };
 
-  const renderContent = useMemo(() => {
-    if (isLoading && !data) return <Spinner />;
-    if (error) return <ErrorMessage />;
-    if (data) return <ComicsListItem data={data}/>;
-    return null;
-  }, [data, error, isLoading]);
 
-  const btnText = isLoading ? '...Loading' : 'Load more';
-  const disabled = !!(data && data.data.total < offset) || isLoading;
+  const btnText = status === EStatus.LOADING ? '...Loading' : 'Load more';
+  const disabled = !!(data && data.data.total < offset) || status === EStatus.LOADING;
 
 
   return (
     <div className="comics__list">
-      {renderContent}
+      {renderContent({status,data,Component:ComicsListItem,spinner:!data})}
       <button  
         className="button button__main button__long"
         onClick={onClick}
